@@ -9,26 +9,15 @@ namespace notebook_rssu
 {
     public static class TextWork
     {
-        // Метод поиска текста в TextBox
-        // Для использования создаем в форме поиска глобальную переменную 
-        // типа int = 0 для стартовой позиции поиска,
-        // передаем в метод ссылки на TextBox'ы с исходным и искомым текстами,
-        // а также необходимо указать, учитывать ли регистр букв при поиске (True - учитывать, False - не учитывать)
-        public static int FindTextBox(ref TextBox textBox, string findText, ref int findCutLength, bool register)
+    public static int FindTextBox(ref TextBox textBox, string findText, ref int findCutLength, bool register)
         {
-            // Поиск с учетом регистра
             if (register == true)
             {
                 if (textBox.Text.Contains(findText))
                 {
-                    // Заносим текст в переменную string, удаляем из него уже пройденный 
-                    // текст (findCutLength) в переменной nextText
                     string text = textBox.Text;
                     string nextText = text.Remove(0, findCutLength);
-                    // Ищем в nextText
                     int resultPosition = nextText.IndexOf(findText);
-                    // Если искомое выражение найдено - выделяем его, добавляем его позицию и длину 
-                    // к значению пройденного текста (findCutLenght)
                     if (resultPosition != -1)
                     {
                         textBox.Select(resultPosition + findCutLength, findText.Length);
@@ -36,8 +25,6 @@ namespace notebook_rssu
                         textBox.Focus();
                         findCutLength += findText.Length + resultPosition;
                     }
-                    // Если попытка поиска не первая, и больше совпадений в тексте нет - обнуляем
-                    // значение пройденного текста и начинаем поиск сначала
                     else if (resultPosition == -1 && findCutLength != 0)
                     {
                         findCutLength = 0;

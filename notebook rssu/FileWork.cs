@@ -29,7 +29,7 @@ namespace notebook_rssu
             if (openDocument.ShowDialog() == DialogResult.OK)
             {
                 FileStream file = new FileStream(openDocument.FileName, FileMode.Open, FileAccess.Read);
-                StreamReader reader = new StreamReader(file, Encoding.Default);
+                StreamReader reader = new StreamReader(file, Encoding.UTF8);
                 notebox.Text = reader.ReadToEnd();
                 reader.Close();
                 docPath = openDocument.FileName;
@@ -41,7 +41,7 @@ namespace notebook_rssu
         public static void SaveFile(ref TextBox notebox, ref bool tbChange, ref string docPath) // сохранить
         {
             FileStream file = new FileStream(docPath, FileMode.Create, FileAccess.Write);
-            StreamWriter writer = new StreamWriter(file, Encoding.Default);
+            StreamWriter writer = new StreamWriter(file, Encoding.UTF8);
             writer.Write(notebox.Text);
             writer.Close();
             tbChange = false;
@@ -58,7 +58,7 @@ namespace notebook_rssu
             if (saveAsDocument.ShowDialog() == DialogResult.OK) //если да
             {
                                 FileStream file = new FileStream(saveAsDocument.FileName, FileMode.Create, FileAccess.Write);
-                StreamWriter writer = new StreamWriter(file, Encoding.Default);
+                StreamWriter writer = new StreamWriter(file, Encoding.UTF8);
                 writer.Write(notebox.Text); 
                 writer.Close(); 
                 tbChange = false;
